@@ -1,0 +1,9 @@
+#  # Type casting , Type conversion
+# a = int("3")
+# c = 3
+# print(a * c)
+
+a = "5"
+b = 3
+c = int(a)
+print(c+b)
