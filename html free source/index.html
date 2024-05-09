@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="index.css">
+    <title>Document</title>
+    <script>
+        function addnums(){
+           let a = document.getElementById("num1").value;
+          let   b = document.getElementById("num2").value;
+           let c = a+b;
+          let  h10obj = document.getElementById("res") 
+          h10obj.innerHTML="<span style='color:blue;'>The sum is"+c+"</span>";
+        
+
+        }
+    </script>
+</head>
+<body>
+    <h1 id="res"></h1>
+
+    num1:<input type="text" id="num1"><br>
+    num1:<input type="text" id="num2"><br>
+    <button onclick="addnums()">add</button>
+    
+</body>
+</html>
