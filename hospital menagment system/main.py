@@ -2,6 +2,9 @@
 # tkinter is using to grafical user interface (GUI).
 from tkinter import *
 from tkinter import ttk
+import random
+import time
+import datetime
 from tkinter import messagebox
 import mysql.connector
 
@@ -13,52 +16,50 @@ win.config(bg='black')#usng congig are set in background color.
 # get method are used in fatch an info.
 ################################################
 def pdb():
-    if e1.get() == "" or e2.get() == "":
-        messagebox.showerror("Error","all fields are required")
-    else:
+ if e1.get() == "" or e2.get() == "":
+    messagebox.showerror("Error","all fields are required")
+ else:
         # mysql.connector.connect(host,username,password,database)under for peramiter
-        con = mysql.connector.connect(host='localhost',username='root',password='4011', database='mydata')    
+    con = mysql.connector.connect(host='localhost',username='root',password='4011', database='alldata')    
         #my courser
-        my_cursor = con.cursor()
+    my_cursor = con.cursor()
         # thier will using query in insert a table of connect sqldata base.
-        my_cursor.execute("insert into alldata values(%S,%S,%S,%S,%S,%S,%S,%S,%S,%S,%S,%S,%S,%S)",(
-            nameoftablet.get(),
-            Ref.get(),
-            date.get(),
-            nooftablets.get(),
-            issuedate.get(),
-            expdate.get(),
-            dalydose.get(),
-            sideeffact.get(),
-            bloodpresure.get(),
-            StoregeDevice.get(),
-            medcation.get(),
-            Patientid.get(),
-            PatientName.get(),
-            PerientAddress.get(),
-        ))
-        con.commit()
-        # fetch_data()
-        con.close()
-        messagebox.showinfo("success","Data has been inserted")
+    my_cursor.execute("insert into alldata values(%S,%S,%S,%S,%S,%S,%S,%S,%S,%S,%S,%S,%S,%S)",(
+        NameofTablet.get(),
+        RefrenceNO.get(),
+        Does.get(),
+        NoofTablets.get(),
+        Issue.get(),
+        ExpiryDate.get(),
+        DalyDose.get(),
+        SideEffect.get(),
+        BloodPrasure.get(),
+        Patientid.get(),
+        PatientName.get(),
+        PerientAddress.get(),
+    ))
+    con.commit()
+    fetch_data()
+    con.close()
+    messagebox.showinfo("success","Data has been inserted")
 ####################################################
 ########
 
 
 #fatch data.
-# def fetch_data():
-#         con = mysql.connector.connect(host='localhost',username='root',password='4011', database='mysql1')    
+def fetch_data():
+    con = mysql.connector.connect(host='localhost',username='root',password='4011', database='alldata')    
 # # #         #my courser
-#         my_cursor = con.cursor()
+    my_cursor = con.cursor()
 # # #         # thier will using query in insert a table of connect sqldata base.
-#         my_cursor.execute('select* from hospital')
-#         rows = my_cursor.fetchall()
-#         if len(rows) != 0:
-#           table.delete(* table.get_children())
-#           for item in rows:
-#               table.insert(' ',END,values=item)
-#         con.commit()
-#         con.close() 
+    my_cursor.execute('select* from alldata')
+    rows = my_cursor.fetchall()
+    if len(rows) != 0:
+        table.delete(* table.get_children())
+        for item in rows:
+            table.insert(' ',END,values=item)
+        con.commit()
+    con.close() 
 ########################################
 
 
@@ -100,66 +101,55 @@ Label(Frame1,text='Side Effect',bg='pink',font='arial 10 bold').place(x=30,y=435
 #right
 #blood preseure
 Label(Frame1,text='Blood Prasure',bg='pink',font='arial 10 bold').place(x=450,y=25)
-#storege device
-Label(Frame1,text='Storege Device',bg='pink',font='arial 10 bold').place(x=450,y=70)
-#medcation
-Label(Frame1,text='Medcation',bg='pink',font='arial 10 bold').place(x=450,y=115)
 #patient id.
-Label(Frame1,text='Patient id',bg='pink',font='arial 10 bold').place(x=450,y=160)
+Label(Frame1,text='Patient id',bg='pink',font='arial 10 bold').place(x=450,y=70)
 #patient Name.
-Label(Frame1,text='Patient Name',bg='pink',font='arial 10 bold').place(x=450,y=215)
+Label(Frame1,text='Patient Name',bg='pink',font='arial 10 bold').place(x=450,y=115)
 #DOB
-Label(Frame1,text='DOB',bg='pink',font='arial 10 bold').place(x=450,y=265)
+Label(Frame1,text='DOB',bg='pink',font='arial 10 bold').place(x=450,y=160)
 #petient addr.
-Label(Frame1,text='Perient Address.',bg='pink',font='arial 10 bold').place(x=450,y=310)
+Label(Frame1,text='Perient Address.',bg='pink',font='arial 10 bold').place(x=450,y=215)
 #entry Field for all labels.
 #TEXT veriabal for all lables
-nameoftablet = StringVar()
-Ref = StringVar()
-date = StringVar
-nooftablets= StringVar()
-issuedate =StringVar()
-expdate = StringVar()
-dalydose = StringVar()
-sideeffact = StringVar()
-bloodpresure = StringVar()
-StoregeDevice = StringVar()
-medcation = StringVar()
+NameofTablet = StringVar()
+RefrenceNO = StringVar()
+Does = StringVar
+NoofTablets= StringVar()
+Issue =StringVar()
+ExpiryDate = StringVar()
+DalyDose = StringVar()
+SideEffect = StringVar()
+BloodPrasure = StringVar()
 Patientid = StringVar()
 PatientName = StringVar()
 DOB = StringVar()
 PerientAddress = StringVar()
 #left
-e1 = Entry(lf1,bd=4,textvariable=nameoftablet)
+e1 = Entry(lf1,bd=4,textvariable=NameofTablet)
 e1.place(x=150,y=8,width=210)
-e2 = Entry(lf1,bd=4, textvariable=Ref)
+e2 = Entry(lf1,bd=4, textvariable=RefrenceNO)
 e2.place(x=150,y=50,width=210)
-e3 = Entry(lf1,bd=4, textvariable=nooftablets)
+e3 = Entry(lf1,bd=4, textvariable=Does)
 e3.place(x=150,y=90,width=210)
-e4 = Entry(lf1,bd=4, textvariable=issuedate)
+e4 = Entry(lf1,bd=4, textvariable=NoofTablets)
 e4.place(x=150,y=140,width=210)
-e5 = Entry(lf1,bd=4, textvariable=expdate)
+e5 = Entry(lf1,bd=4, textvariable=Issue)
 e5.place(x=150,y=190,width=210)
-e6 = Entry(lf1,bd=4, textvariable=dalydose)
+e6 = Entry(lf1,bd=4, textvariable=ExpiryDate)
 e6.place(x=150,y=240,width=210)
-e7 = Entry(lf1,bd=4, textvariable=sideeffact)
+e7 = Entry(lf1,bd=4, textvariable=DalyDose)
 e7.place(x=150,y=290,width=210)
 #right
-e8 = Entry(lf1,bd=4, textvariable=bloodpresure)
+e8 = Entry(lf1,bd=4, textvariable=BloodPrasure)
 e8.place(x=600,y=8,width=210)
-e9 = Entry(lf1,bd=4, textvariable=StoregeDevice)
+e9 = Entry(lf1,bd=4, textvariable=Patientid)
 e9.place(x=600,y=50,width=210)
-e10 = Entry(lf1,bd=4, textvariable=medcation)
+e10 = Entry(lf1,bd=4, textvariable=PatientName)
 e10.place(x=600,y=90,width=210)
-e11 = Entry(lf1,bd=4, textvariable=Patientid)
+e11 = Entry(lf1,bd=4, textvariable=DOB)
 e11.place(x=600,y=140,width=210)
-e12 = Entry(lf1,bd=4, textvariable=PatientName)
+e12 = Entry(lf1,bd=4, textvariable=PerientAddress)
 e12.place(x=600,y=190,width=210)
-e13 = Entry(lf1,bd=4, textvariable=DOB)
-e13.place(x=600,y=245,width=210)
-e14 = Entry(lf1,bd=4, textvariable=PerientAddress)
-e14.place(x=600,y=290,width=210)
-#
 # frame priscription
 lf2 = LabelFrame(Frame1,text='PRISCIPTION',font='arial 10 bold',bd=10)
 lf2.place(x=920,y=0,width=580,height=370)
@@ -231,4 +221,5 @@ table.column('PI',width=100)
 table.column('PN',width=100)
 table.column('DOB',width=100)
 table.column('PA',width=100)
+
 mainloop()
